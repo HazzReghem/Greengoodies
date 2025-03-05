@@ -3,34 +3,34 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>{% block title %}Greengoodies{% endblock %}</title>
+        <title>{% block title %}Green Goodies{% endblock %}</title>
 
-        <link rel="stylesheet" href="{{ asset('build/css/app.min.css') }}">
-        <link rel="preload" as="image" href="{{ asset('images/logo.webp') }}">
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+        <link rel="preload" as="image" href="{{ asset('images/Logo.webp') }}">
 
     </head>
 
     <body>
         <header>
             <nav>
-                <a href="{{ path('home') }}" id="logo">
-                    <img src="{{ asset('images/logo.webp') }}" alt="Greengoodies">
+                <a href="{{ path('homepage') }}" id="logo">
+                    <img src="{{ asset('images/Logo_2x.webp') }}" alt="Greengoodies">
                 </a>
                 <ul id="menu">
-                    <li><a href="{{ path('products') }}">Nos produits</a></li>
-                    <li><a href="{{ path('cart') }}">Mon panier</a></li>
-                    <li><a href="{{ path('account') }}">Mon compte</a></li>
-                    <li><a href="{{ path('contact') }}">Déconnexion</a></li>
+                    <li><a href="{{ path('homepage') }}">Nos produits</a></li>
+                    <li><a href="{{ path('homepage') }}">Mon panier</a></li>
+                    <li><a href="{{ path('homepage') }}">Mon compte</a></li>
+                    <li><a href="{{ path('homepage') }}">Déconnexion</a></li>
                 </ul>
             </nav>
         </header>
 
         <main>
-            {% block body %}{% endblock %}
+            {% block content %}{% endblock %}
         </main>
 
         <footer>
-            <p>>© GreenGoodies - {{ "now"|date("Y") }}</p>
+            <p>© GreenGoodies - {{ "now"|date("Y") }}</p>
         </footer>
     </body>
 </html>
