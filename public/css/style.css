@@ -54,3 +54,56 @@ nav {
     color : black; 
 }
 
+/* PAGE LOGIN */
+
+#login-section {
+    display: flex;
+}
+
+#login-section img {
+    width: 50%;
+    min-width: 50%;
+}
+
+.login {
+    width: 50%;
+    margin: 80px 115px 140px 80px;
+}
+
+.login h1 {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.login p {
+    font-size: 12px;
+    font-weight: 400;
+    color: #666666;
+    margin-bottom: 25px;
+}
+
+.login form{
+    color: #666666;
+    font-size: 14px;
+    font-weight: 400;
+}
+.login input{
+    height: 65px;
+    border: 1px solid #666666;
+    border-radius: 1px;
+    margin-bottom: 30px;
+    outline: none;
+    padding: 0 20px;
+}
+
+.login label{
+    margin-bottom: 10px;
+    color: #666666;
+}
+
+.login form div {
+    display: flex;
+    flex-direction: column;
+}
+
