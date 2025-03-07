@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription - {{ parent() }} {% endblock %}
+
+{% block content %}
+    <h1>Inscription</h1>
+    <p>Tous les champs sont obligatoires.</p>
+
+    {{ form_start(registrationForm) }}
+        {{ form_row(registrationForm.lastName) }}
+        {{ form_row(registrationForm.firstName) }}
+        {{ form_row(registrationForm.email) }}
+        {{ form_row(registrationForm.password.first) }}
+        {{ form_row(registrationForm.password.second) }}
+        {{ form_row(registrationForm.agreeTerms) }}
+
+        <button type="submit" class="btn">S'inscrire</button>
+        <a href="{{ path('app_homepage') }}" class="link-logout">Déjà un compte ? Se connecter</a>
+    {{ form_end(registrationForm) }}
+{% endblock %}
