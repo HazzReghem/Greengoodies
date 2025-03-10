@@ -3,19 +3,23 @@
 {% block title %}Connexion - {{ parent()}} {% endblock %}
 
 {% block content %}
-    <h2>Connexion</h2>
+    <section id="login-section">
+        <img src="{{ asset('images/login.webp') }}" alt="image de végétation">
 
-    {% if error %}
-        <p style="color: red;">{{ error.messageKey|trans(error.messageData, 'security') }}</p>
-    {% endif %}
+        <div class="login">
+            <h1>Connexion</h1>
+            <p>Connectez-vous pour accéder à votre espace personnel.</p>
 
-    <form method="post" action="{{ path('app_login') }}">
-        <label for="username">Adresse email</label>
-        <input type="email" value="{{ email }}" name="_username" id="username" required>
+            <form method="post" action="{{ path('app_login') }}" class="login-form">
+                <label for="username">Adresse email</label>
+                <input type="email" value="{{ email }}" name="_username" id="username" required>
 
-        <label for="password">Mot de passe</label>
-        <input type="password" name="_password" id="password" required>
+                <label for="password">Mot de passe</label>
+                <input type="password" name="_password" id="password" required>
 
-        <button type="submit">Se connecter</button>
-    </form>
+                <button type="submit" class="btn">Se connecter</button>
+                <a href="{{ path('app_register') }}" class="link-login">Pas encore de compte ? S'inscrire</a>
+            </form>
+        </div>
+    </section>
 {% endblock %}

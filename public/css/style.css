@@ -132,3 +132,9 @@ nav {
     display: flex;
     justify-content: center;
 }
+
+/* PAGE LOGIN */
+.login-form{
+    display: flex;
+    flex-direction: column;
+}
