@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil - {{ parent() }}{% endblock %}
+
+{% block content %}
+    <section id="home-top-section">
+        <div class="welcome-container">
+            <h1>Bienvenue</h1>
+            <div class="welcome-text">
+                <p>Découvrez notre univers de produits durables et éthiques pour une consommation responsable</p>
+                <p>Retrouvez des articles d'hygiène & beauté, des accessoires & boissons et du prêt à porter</p>
+            </div>
+        </div>
+        <img src="{{ asset('images/homepage_pic.webp') }}" alt="illustration d'accueil ecologique">
+    </section>
+
+    <section id="products-section">
+        <div class="products-title">
+            <h3>NOS PRODUITS</h3>
+        </div>
+        {# <div class="products-container">
+            <div class="product-card">
+                <img src="{{ asset('images/products/produit1.webp') }}" alt="produit 1">
+                <h3>Produit 1</h3>
+                <p>Description du produit 1</p>
+            </div>
+            <div class="product-card">
+                <img src="{{ asset('images/products/produit2.webp') }}" alt="produit 2">
+                <h3>Produit 2</h3>
+                <p>Description du produit 2</p>
+            </div>
+            <div class="product-card">
+                <img src="{{ asset('images/products/produit3.webp') }}" alt="produit 3">
+                <h3>Produit 3</h3>
+                <p>Description du produit 3</p>
+            </div>
+        </div> #}
+    </section>
+
+    <section id="about-section">
+        <div class="about-container">
+            <h3>NOTRE CONVICTION</h3>
+            <p>Chez GreenGoodies, nous croyons en un monde où le commerce peut être synonyme de bien-être pour la planète et ses habitants. Notre mission est de vous proposer une sélection rigoureuse de produits qui allient qualité, durabilité et éthique</p>
+        </div>
+        <img src="{{ asset('images/login.webp') }}" alt="illustration nature">
+    </section>
+
+    <section id="value-section">
+        <img src="{{ asset('images/trash.webp') }}" alt="illustration poubelles">
+        <div class="value-container">
+            <h3>NOS VALEURS</h3>
+            <p>Durabilité : Nous sélectionnons soigneusement des produits qui respectent l'environnement et favorisent la durabilité.
+            Éthique : Nous nous engageons à travailler avec des partenaires et des fournisseurs qui partagent nos valeurs éthiques.
+            Écologie : Nous encourageons des pratiques respectueuses de l'écosystème et privilégions les matériaux écologiques.</p>
+        </div>
+    </section
+{% endblock %}
