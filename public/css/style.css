@@ -56,8 +56,9 @@ nav {
 
 /* PAGE LOGIN */
 
-#login-section {
+#register-section {
     display: flex;
+    background: #FFFDF7;
 }
 
 #login-section img {
@@ -134,6 +135,12 @@ nav {
 }
 
 /* PAGE LOGIN */
+
+#login-section {
+    display: flex;
+    background: #FFFDF7;
+}
+
 .login-form{
     display: flex;
     flex-direction: column;
