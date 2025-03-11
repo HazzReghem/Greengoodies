@@ -18,23 +18,19 @@
         <div class="products-title">
             <h3>NOS PRODUITS</h3>
         </div>
-        {# <div class="products-container">
-            <div class="product-card">
-                <img src="{{ asset('images/products/produit1.webp') }}" alt="produit 1">
-                <h3>Produit 1</h3>
-                <p>Description du produit 1</p>
-            </div>
-            <div class="product-card">
-                <img src="{{ asset('images/products/produit2.webp') }}" alt="produit 2">
-                <h3>Produit 2</h3>
-                <p>Description du produit 2</p>
-            </div>
-            <div class="product-card">
-                <img src="{{ asset('images/products/produit3.webp') }}" alt="produit 3">
-                <h3>Produit 3</h3>
-                <p>Description du produit 3</p>
-            </div>
-        </div> #}
+        <div class="products-container">
+            {% for product in products %}
+                <div class="product-card">
+                    <img src="{{ asset('images/products/' ~ product.picture) }}" alt="{{ product.name }}">
+                    <div class="product-card-info">
+                        <h4>{{ product.name }}</h4>
+                        <p>{{ product.shortDescription }}</p>
+                        <p class="product-price">{{ product.price|number_format(2, '.', ' ') }} €</p>
+                        <a href="{{ path('app_homepage', {'id': product.id}) }}">Voir le produit</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
     </section>
 
     <section id="about-section">

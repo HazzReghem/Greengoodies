@@ -200,6 +200,50 @@ nav {
     margin-left: 100px;
 }
 
+.products-container {
+    display: flex;
+    flex-flow: row wrap;
+    width: 100%;
+    background: #FFFDF7;
+}
+
+.product-card {
+    width: 33.33%;
+    height: 690px;
+}
+
+.product-card img{
+    object-fit: cover;
+    width: 100%;
+}
+
+.product-card-info{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 40px;
+}
+
+.product-card-info h4{
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.product-card-info p{
+    font-size: 14px;
+    padding-top: 8px;
+}
+
+.product-card-info a{
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.product-price{
+    padding: 20px 0!important;
+}
+
 #about-section {
     height: 650px;
     display: flex;

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Repository\ProductRepository;
 use App\Form\RegistrationFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -13,9 +14,13 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 final class MainController extends AbstractController{
     #[Route('/', name: 'app_homepage')]
-    public function index(): Response
+    public function index(ProductRepository $productRepository): Response
     {
-        return $this->render('pages/home.html.twig');
+        $products = $productRepository->findAll();
+
+        return $this->render('pages/home.html.twig', [
+            'products' => $products,
+        ]);
     }
 
     #[Route('/register', name: 'app_register')]
