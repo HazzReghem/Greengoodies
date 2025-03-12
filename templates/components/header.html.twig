@@ -4,10 +4,15 @@
             <img src="{{ asset('images/Logo_2x.webp') }}" alt="Greengoodies">
         </a>
         <ul id="menu">
-            <li><a href="{{ path('app_homepage') }}">Nos produits</a></li>
-            <li><a href="{{ path('app_homepage') }}">Mon panier</a></li>
-            <li><a href="{{ path('app_login') }}">Mon compte</a></li>
-            <li><a href="{{ path('app_logout') }}">Déconnexion</a></li>
+            {% if app.user %}
+                <li><a href="{{ path('app_homepage') }}">Nos produits</a></li>
+                <li><a href="{{ path('app_homepage') }}">Mon panier</a></li>
+                <li><a href="{{ path('app_homepage') }}">Mon compte</a></li>
+                <li><a href="{{ path('app_logout') }}">Déconnexion</a></li>
+            {% else %}
+                <li><a href="{{ path('app_login') }}">Connexion</a></li>
+                <li><a href="{{ path('app_register') }}">Inscription</a></li>
+            {% endif %}
         </ul>
     </nav>
 </header>

@@ -12,7 +12,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
+use Symfony\Bundle\SecurityBundle\Security;
+
 final class MainController extends AbstractController{
+
     #[Route('/', name: 'app_homepage')]
     public function index(ProductRepository $productRepository): Response
     {
@@ -24,9 +27,10 @@ final class MainController extends AbstractController{
     }
 
     #[Route('/register', name: 'app_register')]
-    public function register(Request $request,  UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $entityManager): Response
+    public function register(Request $request,  UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $entityManager, Security $security): Response
     {
         $user = new User();
+
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
@@ -38,9 +42,13 @@ final class MainController extends AbstractController{
                     $form->get('password')->getData()
                 )
             );
-
+            $user->setRoles(['ROLE_USER']);
+            
             $entityManager->persist($user);
             $entityManager->flush();
+
+            // Connexion automatique de l'utilisateur
+            $security->login($user);
 
             return $this->redirectToRoute('app_homepage');
         }
