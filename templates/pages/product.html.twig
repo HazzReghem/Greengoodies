@@ -11,7 +11,11 @@
                 <p class="product-price">{{ product.price|number_format(2, '.', ' ') }} €</p>
                 <h4>Description</h4>
                 <p class="full-description">{{ product.fullDescription }}</p>
-                <button type="submit" class="btn">Ajouter au panier</button>
+                {% if app.user %}
+                    <button type="submit" class="btn">Ajouter au panier</button>
+                {% else %}
+                    <button class="btn" onclick="window.location.href='{{ path('app_login') }}'">Connectez-vous pour commander</button>
+                {% endif %}
             </div>
         </div>
     </section>
