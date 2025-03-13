@@ -57,4 +57,14 @@ final class MainController extends AbstractController{
             'registrationForm' => $form->createView(),
         ]);
     }
+
+    #[Route('/product/{id}', name: 'app_product')]
+    public function product(ProductRepository $productRepository, $id): Response
+    {
+        $product = $productRepository->find($id);
+
+        return $this->render('pages/product.html.twig', [
+            'product' => $product,
+        ]);
+    }
 }
