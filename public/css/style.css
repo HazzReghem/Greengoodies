@@ -126,6 +126,7 @@ nav {
     color: #FFF;
     border: none;
     margin-bottom: 25px;
+    transition: background 0.6s ease-in-out;
 }
 
 .btn:hover{
