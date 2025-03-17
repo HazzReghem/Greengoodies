@@ -8,6 +8,7 @@ use App\Form\RegistrationFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -66,5 +67,70 @@ final class MainController extends AbstractController{
         return $this->render('pages/product.html.twig', [
             'product' => $product,
         ]);
+    }
+
+    #[Route('/cart', name: 'app_cart')]
+    public function cart(RequestStack $requestStack): Response
+    {
+        $session = $requestStack->getSession();
+        $cart = $session->get('cart', []);
+
+        return $this->render('pages/cart.html.twig', [
+            'cart' => $cart,
+        ]);
+    }
+
+    #[Route('/cart/add/{id}', name: 'app_add_to_cart')]
+    public function addToCart(int $id, ProductRepository $productRepository, RequestStack $requestStack): Response
+    {
+        $session = $requestStack->getSession();
+        $cart = $session->get('cart', []);
+
+        $product = $productRepository->find($id);
+        if (!$product) {
+            throw $this->createNotFoundException('Produit non trouvé.');
+        }
+
+        if (isset($cart[$id])) {
+            $cart[$id]['quantity']++;
+        } else {
+            $cart[$id] = [
+                'name' => $product->getName(),
+                'picture' => $product->getPicture(),
+                'price' => $product->getPrice(),
+                'quantity' => 1
+            ];
+        }
+
+        $session->set('cart', $cart);
+
+        return $this->redirectToRoute('app_cart');
+    }
+    
+    #[Route('/cart/empty', name: 'app_empty_cart')]
+    public function emptyCart(RequestStack $requestStack): Response
+    {
+        $session = $requestStack->getSession();
+        $session->remove('cart');
+
+        return $this->redirectToRoute('app_cart');
+    }
+
+    #[Route('/panier/valider', name: 'app_cart_validate')]
+    public function validateCart(RequestStack $requestStack): Response
+    {
+        $session = $requestStack->getSession();
+        $cart = $session->get('cart', []);
+
+        if (empty($cart)) {
+            $this->addFlash('error', 'Votre panier est vide.');
+            return $this->redirectToRoute('app_cart');
+        }
+
+        $session->remove('cart');
+
+        $this->addFlash('success', 'Votre commande a été validée avec succès !');
+
+        return $this->redirectToRoute('app_cart');
     }
 }

@@ -6,7 +6,7 @@
         <ul id="menu">
             {% if app.user %}
                 <li><a href="{{ path('app_homepage') }}#products-section">Nos produits</a></li>
-                <li><a href="{{ path('app_homepage') }}">Mon panier</a></li>
+                <li><a href="{{ path('app_cart') }}">Mon panier</a></li>
                 <li><a href="{{ path('app_homepage') }}">Mon compte</a></li>
                 <li><a href="{{ path('app_logout') }}">Déconnexion</a></li>
             {% else %}

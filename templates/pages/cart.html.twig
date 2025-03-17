@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon Panier - {{ parent() }}{% endblock %}
+
+{% block content %}
+    <section id="cart-section">
+        <h1>Mon Panier</h1>
+
+        {% if cart is empty %}
+            <p>Votre panier est vide.</p>
+        {% else %}
+            <a href="{{ path('app_empty_cart') }}" class="empty-btn">x Vider le panier</a>
+
+            {% set total = 0 %}
+
+            {% for id, item in cart %}
+            <div class="cart-container">
+                {# {% for id, item in cart %} #}
+                    <img src="{{ asset('images/products/' ~ item.picture) }}" alt="{{item.name}}">
+                    <div class="cart-item">
+                        <h3>{{ item.name }}</h3>
+                        <p class="item-quantity"> Quantité : {{ item.quantity }}</p>
+                        <p class="item-price">{{ item.price|number_format(2, ',', ' ') }} €</p> 
+                    </div>
+                    {% set total = total + (item.price * item.quantity) %}
+                {# {% endfor %} #}
+            </div>
+            {% endfor %}
+            <div class="total-cart">
+                <p class="total-price">Total du panier : <span>{{ total|number_format(2, ',', ' ') }} €</span></p>
+                <p class="export">Frais de livraison : Offert </p>
+            </div>
+            <a href="{{ path('app_cart_validate') }}" class="cart-btn">Valider la commande</a>
+        {% endif %}
+    </section>
+{% endblock %}

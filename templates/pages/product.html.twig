@@ -12,7 +12,9 @@
                 <h4>Description</h4>
                 <p class="full-description">{{ product.fullDescription }}</p>
                 {% if app.user %}
-                    <button type="submit" class="btn">Ajouter au panier</button>
+                    <form action="{{ path('app_add_to_cart', {'id': product.id}) }}" method="post">
+                        <button type="submit" class="btn">Ajouter au panier</button>
+                    </form>
                 {% else %}
                     <button class="btn" onclick="window.location.href='{{ path('app_login') }}'">Connectez-vous pour commander</button>
                 {% endif %}
