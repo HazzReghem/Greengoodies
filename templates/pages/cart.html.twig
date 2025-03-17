@@ -30,7 +30,7 @@
                 <p class="total-price">Total du panier : <span>{{ total|number_format(2, ',', ' ') }} €</span></p>
                 <p class="export">Frais de livraison : Offert </p>
             </div>
-            <a href="{{ path('app_cart_validate') }}" class="cart-btn">Valider la commande</a>
+            <a href="{{ path('app_validate_cart') }}" class="cart-btn">Valider la commande</a>
         {% endif %}
     </section>
 {% endblock %}

@@ -69,6 +69,8 @@ final class MainController extends AbstractController{
         ]);
     }
 
+    // ---------------------- PANIER ------------------------------
+    
     #[Route('/cart', name: 'app_cart')]
     public function cart(RequestStack $requestStack): Response
     {
@@ -116,7 +118,7 @@ final class MainController extends AbstractController{
         return $this->redirectToRoute('app_cart');
     }
 
-    #[Route('/panier/valider', name: 'app_cart_validate')]
+    #[Route('/panier/valider', name: 'app_validate_cart')]
     public function validateCart(RequestStack $requestStack): Response
     {
         $session = $requestStack->getSession();
