@@ -374,6 +374,7 @@ nav {
 }
 
 /* PAGE PANIER */
+
 #cart-section {
     background: #F7F1EC;
     display: flex;
@@ -479,4 +480,10 @@ nav {
 
 .cart-btn:hover {
     background: #333333;
+}
+
+/* MON COMPTE */
+
+#account-section {
+    background: #F7F1EC;
 }

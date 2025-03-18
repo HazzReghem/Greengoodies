@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon compte - {{ parent() }}{% endblock %}
+
+{% block content %}
+    <section id ="account-section">
+        <h1>Mon compte</h1>
+
+        <div class="orders-container">
+            <h2>Mes commandes</h2>
+            {% if orders is empty %}
+                <p>Aucune commande passée.</p>
+            {% else %}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>N°</th>
+                            <th>Date</th>
+                            <th>Prix</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for order in orders %}
+                            <tr>
+                                <td>{{ order.id }}</td>
+                                <td>{{ order.createdAt|date('d/m/Y') }}</td>
+                                <td>{{ order.totalPrice|number_format(2, ',', ' ') }}€</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
+        </div>
+
+        {# <div class="api-access-container">
+            <h2>Mon accès API</h2>
+            <form action="{{ path('app_account') }}" method="post">
+                <button type="submit" class="btn">{{ user.apiAccess ? 'Désactiver' : 'Activer' }} mon accès API</button>
+            </form>
+        </div> #}
+
+        <div class="delete-account-container">
+            <form action="{{ path('app_account_delete') }}" method="post">
+                <button type="submit" class="btn btn-danger">Supprimer mon compte</button>
+            </form>
+        </div>
+
+    </section>
+{% endblock %}

@@ -151,6 +151,6 @@ final class MainController extends AbstractController{
 
         $this->addFlash('success', 'Votre commande a été validée avec succès !');
 
-        return $this->redirectToRoute('app_cart');
+        return $this->redirectToRoute('app_account');
     }    
 }
