@@ -10,7 +10,7 @@ final class AccountController extends AbstractController{
     #[Route('/account', name: 'app_account')]
     public function index(): Response
     {
-        return $this->render('account/index.html.twig', [
+        return $this->render('pages/account.html.twig', [
             'controller_name' => 'AccountController',
         ]);
     }

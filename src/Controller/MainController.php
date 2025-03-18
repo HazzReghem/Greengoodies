@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\Order;
+
 use App\Repository\ProductRepository;
 use App\Form\RegistrationFormType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -70,7 +72,7 @@ final class MainController extends AbstractController{
     }
 
     // ---------------------- PANIER ------------------------------
-    
+
     #[Route('/cart', name: 'app_cart')]
     public function cart(RequestStack $requestStack): Response
     {
@@ -118,8 +120,8 @@ final class MainController extends AbstractController{
         return $this->redirectToRoute('app_cart');
     }
 
-    #[Route('/panier/valider', name: 'app_validate_cart')]
-    public function validateCart(RequestStack $requestStack): Response
+    #[Route('/cart/valider', name: 'app_validate_cart')]
+    public function validateCart(RequestStack $requestStack, EntityManagerInterface $entityManager, Security $security): Response
     {
         $session = $requestStack->getSession();
         $cart = $session->get('cart', []);
@@ -129,10 +131,26 @@ final class MainController extends AbstractController{
             return $this->redirectToRoute('app_cart');
         }
 
+        // calcul du prix total
+        $totalPrice = 0;
+        foreach ($cart as $item) {
+            $totalPrice += $item['price'] * $item['quantity'];
+        }
+
+        // création de la commande
+        $order = new Order();
+        $order->setUser($security->getUser());
+        $order->setCreatedAt(new \DateTimeImmutable());
+        $order->setTotalPrice($totalPrice);
+
+        // sauvegarde de la commande
+        $entityManager->persist($order);
+        $entityManager->flush();
+
         $session->remove('cart');
 
         $this->addFlash('success', 'Votre commande a été validée avec succès !');
 
         return $this->redirectToRoute('app_cart');
-    }
+    }    
 }
