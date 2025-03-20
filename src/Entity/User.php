@@ -45,6 +45,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Order::class, mappedBy: 'User')]
     private Collection $orders;
 
+    #[ORM\Column]
+    private ?bool $apiAccess = null;
+
     public function __construct()
     {
         $this->orders = new ArrayCollection();
@@ -174,6 +177,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $order->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function isApiAccess(): ?bool
+    {
+        return $this->apiAccess;
+    }
+
+    public function setApiAccess(bool $apiAccess): static
+    {
+        $this->apiAccess = $apiAccess;
 
         return $this;
     }

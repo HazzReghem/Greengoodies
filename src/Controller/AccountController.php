@@ -40,4 +40,23 @@ final class AccountController extends AbstractController{
         $this->addFlash('success', 'Votre compte a été supprimé.');
         return $this->redirectToRoute('app_homepage');
     }
+
+    #[Route('/account/toggle-api-access', name: 'app_toggle_api_access', methods: ['POST'])]
+    public function toggleApiAccess(EntityManagerInterface $entityManager): Response
+    {
+        $user = $this->getUser();
+        if (!$user) {
+            throw $this->createAccessDeniedException("Vous devez être connecté.");
+        }
+
+        // Inversion de l'état actuel
+        $user->setApiAccess(!$user->isApiAccess());
+        
+        $entityManager->persist($user);
+        $entityManager->flush();
+
+        $this->addFlash('success', $user->isApiAccess() ? 'Accès API activé.' : 'Accès API désactivé.');
+
+        return $this->redirectToRoute('app_account');
+    }
 }

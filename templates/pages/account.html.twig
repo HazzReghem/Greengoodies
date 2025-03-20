@@ -32,12 +32,14 @@
             {% endif %}
         </div>
 
-        {# <div class="api-access-container">
+        <div class="api-access-container">
             <h2>Mon accès API</h2>
-            <form action="{{ path('app_account') }}" method="post">
-                <button type="submit" class="btn">{{ user.apiAccess ? 'Désactiver' : 'Activer' }} mon accès API</button>
+            <form action="{{ path('app_toggle_api_access') }}" method="post">
+                <button type="submit" class="btn">
+                    {{ user.isApiAccess ? 'Désactiver' : 'Activer' }} mon accès API
+                </button>
             </form>
-        </div> #}
+        </div>
 
         <div class="delete-account-container">
             <form action="{{ path('app_account_delete') }}" method="post">

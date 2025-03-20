@@ -490,6 +490,7 @@ nav {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding-bottom: 75px;
 }
 
 #account-section h1 {
@@ -554,4 +555,31 @@ table {
 
 .orders-container tbody tr:last-child {
     border-bottom: none;
+}
+
+.delete-account-container {
+    background: #fffdf7;
+    padding: 60px;
+    width: 605px;
+}
+
+.delete-account-container .btn {
+    margin-bottom: 0;
+}
+
+.api-access-container {
+    background: #fffdf7;
+    padding: 60px;
+    width: 605px;
+    margin-bottom: 15px;
+}
+
+.api-access-container h2{
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 30px;
+}
+
+.api-access-container .btn {
+    margin-bottom: 0;
 }
