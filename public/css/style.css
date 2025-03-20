@@ -486,4 +486,72 @@ nav {
 
 #account-section {
     background: #F7F1EC;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#account-section h1 {
+    font-size: 20px;
+    font-weight: 500;
+    margin: 45px 0;
+}
+
+.orders-container {
+    background: #fffdf7;
+    padding: 60px;
+    margin-bottom: 15px;
+    width: 605px;
+}
+
+.orders-container h2{
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 30px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.orders-container th, 
+.orders-container td {
+    text-align: center; 
+    padding: 10px;
+}
+
+.orders-container th {
+    font-size: 14px;
+    font-weight: 400;
+    color: #666666;
+}
+
+.orders-container td {
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.orders-container tbody tr {
+    border-bottom: 1px solid #ddd;
+}
+
+.orders-container tbody td {
+    padding-bottom: 30px;
+    padding-top: 20px;
+}
+
+.orders-container th:first-child,
+.orders-container td:first-child {
+    text-align: left; 
+}
+
+.orders-container th:last-child,
+.orders-container td:last-child {
+    text-align: right; 
+}
+
+.orders-container tbody tr:last-child {
+    border-bottom: none;
 }
