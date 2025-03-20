@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\ProductRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
 class Product
@@ -14,6 +15,8 @@ class Product
     #[ORM\Column]
     private ?int $id = null;
 
+    
+    #[Groups('product:read')]
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
@@ -23,6 +26,8 @@ class Product
     #[ORM\Column(type: Types::TEXT)]
     private ?string $fullDescription = null;
 
+    
+    #[Groups('product:read')]
     #[ORM\Column]
     private ?float $price = null;
 
