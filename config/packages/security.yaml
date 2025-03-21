@@ -1,29 +1,36 @@
 security:
-    # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
+    # Gestion des hasher de mot de passe
     password_hashers:
         Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
-    # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
+
+    # Provider pour récupérer les utilisateurs depuis la base de données
     providers:
-        # used to reload user from session & other features (e.g. switch_user)
         app_user_provider:
             entity:
                 class: App\Entity\User
                 property: email
+
     firewalls:
+        # Désactivation des firewalls pour certaines routes de développement
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-        # main:
-        #     lazy: true
-        #     provider: app_user_provider
-        #     form_login:
-        #         login_path: app_login
-        #         check_path: app_login
-        #         # enable_csrf: true
-        #     logout:
-        #         path: app_logout
-        #         target: app_homepage
-        login:
+
+        # Gestion de l'authentification via formulaire classique (pour le frontend web)
+        main:
+            pattern: ^/(?!api)  # Empêche main de s'appliquer aux routes /api
+            lazy: true
+            provider: app_user_provider
+            form_login:
+                login_path: app_login
+                check_path: app_login
+            logout:
+                path: app_logout
+                target: app_homepage
+            
+
+        # Firewall pour l'API (connexion avec JSON Web Token)
+        api_login:
             pattern: ^/api/login
             stateless: true
             json_login:
@@ -32,15 +39,20 @@ security:
                 password_path: password
                 success_handler: lexik_jwt_authentication.handler.authentication_success
                 failure_handler: lexik_jwt_authentication.handler.authentication_failure
+
+        # Firewall pour les requêtes API après authentification via JWT
         api:
             pattern: ^/api
             stateless: true
             provider: app_user_provider
             jwt: ~
-            
+
+    # Contrôle d'accès
     access_control:
         - { path: ^/api/login, roles: PUBLIC_ACCESS }
-        - { path: ^/api, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/api, roles: IS_AUTHENTICATED}
+
+
 
 when@test:
     security:
