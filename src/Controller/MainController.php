@@ -46,6 +46,8 @@ final class MainController extends AbstractController{
                 )
             );
             $user->setRoles(['ROLE_USER']);
+            $user->setApiAccess(false);
+
             
             $entityManager->persist($user);
             $entityManager->flush();

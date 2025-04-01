@@ -14,12 +14,13 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
+use Symfony\Component\Serializer\SerializerInterface;
 
 class ApiController extends AbstractController
 {
     #[Route('/api/products', name: 'api_products', methods: ['GET'])]
     #[IsGranted('ROLE_USER')]
-    public function getProducts(ProductRepository $productRepository, UserInterface $user): JsonResponse
+    public function getProducts(ProductRepository $productRepository, UserInterface $user, SerializerInterface $serializer): JsonResponse
     {
         // Vérifier si l'accès API est activé
         if (!$user->isApiAccess()) {
@@ -40,7 +41,9 @@ class ApiController extends AbstractController
             ];
         }
 
-        return new JsonResponse($data, 200);
+        $json = $serializer->serialize($products, 'json', ['groups' => 'product:read']);
+
+        return new JsonResponse($json, 200, [], true);
     }
 
     #[Route('/api/login', name: 'api_login', methods: ['POST'])]
@@ -71,6 +74,7 @@ class ApiController extends AbstractController
 
         $token = $JWTManager->create($user);
 
-        return new JsonResponse(['token' => $token], 200);
+        $json = $serializer->serialize(['token' => $token], 'json');
+        return new JsonResponse($json, 200, [], true);
     }
 }
